@@ -13,6 +13,8 @@ Briefify is a Streamlit web application that transcribes audio files using OpenA
 
 ## Demo
 ![App Screenshot](demo.png)
+[Click here to view the live demo]([https://your-demo-link.com](https://briefify.streamlit.app))
+
 ## Installation and Running Locally
 
 1. **Clone the repository:**
@@ -24,6 +26,7 @@ Briefify is a Streamlit web application that transcribes audio files using OpenA
 3. **Install dependencies:**
 
 - pip install -r requirements.txt
+- and install packages
 
 4. **Run the app:**
 
@@ -45,6 +48,7 @@ You can deploy this app easily on Streamlit Community Cloud:
 briefify-app/
 ├── stream.py
 ├── requirements.txt
+├── packages.txt
 └── README.md
 ```
 ## Technologies Used
@@ -63,6 +67,7 @@ briefify-app/
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+No license specified. All rights reserved by the author.
+Please contact me for permissions or inquiries.
 
 ---
