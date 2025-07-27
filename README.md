@@ -43,7 +43,7 @@ You can deploy this app easily on Streamlit Community Cloud:
 ## Project Structure
 ```
 briefify-app/
-├── app.py
+├── stream.py
 ├── requirements.txt
 └── README.md
 ```
