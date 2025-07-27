@@ -41,12 +41,12 @@ You can deploy this app easily on Streamlit Community Cloud:
 - No server management or infrastructure needed!
 
 ## Project Structure
-
+```
 briefify-app/
 ├── app.py
 ├── requirements.txt
 └── README.md
-
+```
 ## Technologies Used
 
 - [Streamlit](https://streamlit.io/): fast and easy Python web app framework
