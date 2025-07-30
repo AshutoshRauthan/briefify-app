@@ -32,7 +32,6 @@ def format_prompt_with_context(context):
         f"Context:\n{context}\n\n"
         "Key Points:"
     )
-    )
 
 def generate_key_points(pipe, context, max_tokens=400):
     prompt = format_prompt_with_context(context)
