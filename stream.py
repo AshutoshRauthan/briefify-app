@@ -20,21 +20,8 @@ def load_whisper():
 
 def format_prompt_with_context(context):
     return (
-        "Extract key points from the text below.\n"
-        "- Only use what's in the text\n"
-        "- No extra info, no assumptions\n"
-        "- Avoid repetition or contradictions\n"
-        "- Be clear and concise\n"
-        "- Use bullet points\n\n"
-        f"Text:\n{context}\n\n"
-        "Key Points:"
-    )
-
-def summarize_prompt(context):
-    return (
-        "Summarize the main points from the text below.\n"
-        f"Text:\n{context}\n\n"
-        "Summary:"
+        "Summarize the following text into concise key points:\n\n"
+        f"{context}\n\nKey points:"
     )
 
 def generate_key_points(pipe, context, max_tokens=1000):
