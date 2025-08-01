@@ -20,16 +20,35 @@ def load_whisper():
 
 def format_prompt_with_context(context):
     return (
-        "Summarize the following text into concise key points:\n\n"
-        f"{context}\n\nKey points:"
+        "Extract key points from the text below.\n"
+        "- Only use what's in the text\n"
+        "- No extra info, no assumptions\n"
+        "- Avoid repetition or contradictions\n"
+        "- Be clear and concise\n"
+        "- Use bullet points\n\n"
+        f"Text:\n{context}\n\n"
+        "Key Points:"
     )
 
-def generate_key_points(pipe, context, max_tokens=400):
+def summarize_prompt(context):
+    return (
+        "Summarize the main points from the text below.\n"
+        f"Text:\n{context}\n\n"
+        "Summary:"
+    )
+
+def generate_key_points(pipe, context, max_tokens=1000):
     prompt = format_prompt_with_context(context)
     output = pipe(prompt, max_new_tokens=max_tokens, do_sample=True, temperature=0.7)
     generated_text = output[0]["generated_text"]
     key_points = generated_text[len(prompt):].strip()
     return key_points
+def summarizer(pipe, context, max_tokens=1000):
+    prompt = summarize_prompt(context)
+    output = pipe(prompt, max_new_tokens=max_tokens, do_sample=True, temperature=0.7)
+    generated_text=output[0]["generated_text"]
+    summary = generated_text[len(prompt):].strip()
+    return summary
 
 def transcribe_audio(whisper_pipe, audio_file):
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as tmp:
@@ -90,12 +109,17 @@ if audio_file:
         st.write(transcript)
 
     with st.spinner("Generating key points with TinyLLaMA..."):
-        key_points_str = generate_key_points(tinyllama_pipe, transcript)
+        final_summary =generate_key_points(tinyllama_pipe, transcript)
+        key_points_str = final_summary
 
     st.markdown("### Key Points")
     for point in key_points_str.split('\n'):
         if point.strip():
             st.markdown(f"- {point.strip()}")
+    with st.spinner("Summarizing transcript..."):
+        final_summary =summarizer(tinyllama_pipe, transcript)
+    with st.expander("Summary"):
+        st.write(final_summary)
 
     st.success("Processing complete!")
 
